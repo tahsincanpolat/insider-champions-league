@@ -1,0 +1,152 @@
+
+@import 'bootstrap/scss/bootstrap';
+
+$white: #F3F7F0;
+$red:#A93F55;
+$blue:#19323C;
+
+
+body{
+    background-color: $white;
+}
+button{
+    width: 200px;
+    background-color: $red;
+    color: #ffff;
+    padding: 20px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    &:hover{
+        animation: pulse 1s infinite;
+        transition: .3s;
+    }
+    @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        70% {
+          transform: scale(.95);
+        }
+          100% {
+          transform: scale(1);
+        }
+      }
+
+}
+.teams{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 50px auto;
+    .team-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 400px;
+        background-color: $blue;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 10px 14px 55px 0px rgba(0,0,0,0.51);
+        .header{
+            text-align: center;
+            color: $white;
+            font-size: 34px;
+        }
+        .team{
+            color: $red;
+            background-color: $white;
+            margin: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 16px;
+            p{
+                margin: 10px;
+            }
+        }
+    }
+
+}
+.fixture{
+    h1{
+        color: $blue;
+        text-align: center;
+        margin: 20px;
+    }
+    .fixture-box{
+        background-color: $blue;
+        color: $white;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 5px;
+        .week{
+            font-size: 18px;
+            background-color: $white;
+            color: $blue;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+        .teams{
+            display: flex;
+            flex-direction: column;
+            margin: 20px 10px 30px 10px;
+            position: relative;
+            .team-name{
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            .date{
+                font-size: 10px;
+                background-color: $red;
+                color: $white;
+                padding: 3px;
+                border-radius: 5px;
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 30px;
+            }
+            .team1,.team2{
+                width: 150px;
+                text-align: center;
+
+            }
+            .team-name-score{
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
+
+
+    }
+    a{
+        display: flex;
+        justify-content: center;
+        text-decoration: none;
+    }
+}
+.simulation{
+    .simulation-fixture{
+        height: 480px;
+        overflow-y: scroll;
+    }
+    .simulation-fixture::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    .simulation-fixture::-webkit-scrollbar-track {
+        background-color: $blue;
+        border-radius: 5px;
+    }
+    .simulation-fixture::-webkit-scrollbar-thumb {
+        background-color: #fff;
+        border-radius: 5px;
+    }
+}

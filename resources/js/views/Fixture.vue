@@ -1,23 +1,29 @@
 <template>
-    <div>
-      <h1>Fikstür</h1>
-      <div v-if="groupedFixtures.length > 0">
-        <div v-for="week in groupedFixtures" :key="week.week">
-          <h2>Week {{ week.week }}</h2>
-          <ul>
-            <li v-for="fixture in week.fixtures" :key="fixture.id">
-              {{ fixture.match.home_team.name }} vs {{ fixture.match.away_team.name }}
-              - Date: {{ formatDate(fixture.match_date) }}
-              - Played: {{ fixture.is_played ? 'Yes' : 'No' }}
-            </li>
-          </ul>
+    <div class="container fixture">
+        <h1>Fixture</h1>
+        <div v-if="groupedFixtures.length > 0" class="row">
+            <div v-for="week in groupedFixtures" :key="week.week" class="col-md-4">
+                <div class="fixture-box">
+                    <h5 class="week">Week {{ week.week }}</h5>
+                    <div v-for="fixture in week.fixtures" :key="fixture.id" class="teams">
+                        <span class="team-name">
+                            {{ fixture.match.home_team.name }} vs {{ fixture.match.away_team.name }}
+                        </span>
+                        <span class="date">
+                            Match Date: {{ formatDate(fixture.match_date) }}
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button @click="fetchFixtures">Yenile</button>
-      </div>
-      <div v-else>
-        <p>No fixtures created.</p>
-      </div>
+        <div v-else>
+            <p>No fixtures created.</p>
+        </div>
+        <router-link to="/simulation">
+            <button>Start Simulation</button>
+        </router-link>
     </div>
+
   </template>
 
   <script>
@@ -53,7 +59,6 @@
               grouped[week].fixtures.push(fixture);
             });
 
-            // Haftalara göre sıralama
             this.groupedFixtures = Object.values(grouped).sort((a, b) => a.week - b.week);
           })
           .catch((error) => {
