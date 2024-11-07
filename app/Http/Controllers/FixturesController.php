@@ -8,7 +8,7 @@ use App\Models\Matches;
 use App\Models\Fixture;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Helpers\FixtureHelper;
+use App\Helpers\Helper;
 
 class FixturesController extends Controller
 {
@@ -22,7 +22,7 @@ class FixturesController extends Controller
 
         shuffle($teamIds);
 
-        $firstHalfFixtures = FixtureHelper::generateRoundRobinFixtures($teamIds);
+        $firstHalfFixtures = Helper::generateRoundRobinFixtures($teamIds);
 
         $secondHalfFixtures = [];
         foreach ($firstHalfFixtures as $round) {
@@ -50,7 +50,6 @@ class FixturesController extends Controller
                 Fixture::create([
                     'matches_id' => $matchModel->id,
                     'match_date' => Carbon::now()->addDays(($week - 1) * 7),
-                    'is_played' => false,
                 ]);
             }
             $week++;
@@ -68,5 +67,14 @@ class FixturesController extends Controller
         ])->orderBy('match_date')->get();
 
         return response()->json($fixtures);
+    }
+
+    public function getMatches()
+    {
+        $matches = Matches::with(['homeTeam', 'awayTeam'])
+            ->orderBy('week')
+            ->get();
+
+        return response()->json($matches);
     }
 }

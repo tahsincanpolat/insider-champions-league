@@ -48,6 +48,7 @@ class Helper
 
         return $fixtures;
     }
+
     public static function playMatch($match)
     {
         $homeScore = rand(0, 5);
@@ -56,6 +57,7 @@ class Helper
         $match->update([
             'home_team_goal' => $homeScore,
             'away_team_goal' => $awayScore,
+            'is_played' => true,
         ]);
 
         $homeTeam = $match->homeTeam;
