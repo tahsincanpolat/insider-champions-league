@@ -10,8 +10,7 @@ class Fixture extends Model
 
     protected $fillable = [
         'matches_id',
-        'match_date',
-        'is_played'
+        'match_date'
     ];
 
     public function match()

@@ -8,7 +8,13 @@ class Team extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'points',
+        'goals_scored',
+        'goals_conceded',
+        'goal_difference',
+    ];
 
     public function homeMatches()
     {

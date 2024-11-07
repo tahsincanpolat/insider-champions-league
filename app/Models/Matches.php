@@ -13,7 +13,8 @@ class Matches extends Model
         'away_id',
         'home_team_goal',
         'away_team_goal',
-        'week'
+        'week',
+        'is_played'
     ];
 
     public function homeTeam()

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fixtures', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('matches_id')->constrained('matches')->onDelete('cascade');
-            $table->date('match_date');
-            $table->timestamps();
+        Schema::table('fixtures', function (Blueprint $table) {
+            $table->dropColumn('is_played');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fixtures');
+        Schema::table('fixtures', function (Blueprint $table) {
+            $table->boolean('is_played')->default(false);
+        });
     }
 };
