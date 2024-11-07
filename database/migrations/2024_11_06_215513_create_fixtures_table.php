@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('fixtures', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('match_id');
+            $table->foreignId('matches_id')->constrained('matches')->onDelete('cascade');
+            $table->date('match_date');
             $table->boolean('is_played')->default(false);
-            $table->dateTime('match_date');
             $table->timestamps();
-            $table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
         });
     }
 

@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Teams from '../components/Teams.vue';
-import Fixtures from '../components/Fixture.vue';
-import Simulation from '../components/Simulation.vue';
+import Teams from '../views/Teams.vue';
+import Fixtures from '../views/Fixture.vue';
+import Simulation from '../views/Simulation.vue';
 
 const routes = [
   { path: '/', name: 'Teams', component: Teams },

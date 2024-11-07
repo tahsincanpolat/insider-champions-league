@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1>Teams</h1>
-        <ul>
+      <h1>Teams</h1>
+      <ul>
         <li v-for="team in teams" :key="team.id">{{ team.name }}</li>
-        </ul>
-        <button @click="generateFixtures">Generate Fixtures</button>
+      </ul>
+      <button @click="generateFixtures">Generate Fixtures</button>
     </div>
   </template>
 
@@ -19,12 +19,13 @@
       };
     },
     created() {
-        this.fetchTeams();
+      this.fetchTeams();
     },
     methods: {
       fetchTeams() {
-        axios.get('/api/teams')
+        axios.get('/teams')
           .then(response => {
+            console.log(response)
             this.teams = response.data;
           })
           .catch(error => {
@@ -32,7 +33,7 @@
           });
       },
       generateFixtures() {
-        axios.post('/api/generate-fixtures')
+        axios.post('/generate-fixtures')
           .then(() => {
             this.$router.push({ name: 'Fixtures' });
           })
@@ -44,5 +45,5 @@
   };
   </script>
 
-  <style>
+  <style scoped>
   </style>
