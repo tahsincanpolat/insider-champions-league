@@ -13,7 +13,7 @@ button{
     width: 200px;
     background-color: $red;
     color: #ffff;
-    padding: 20px;
+    padding: 15px 20px;
     border-radius: 10px;
     outline: none;
     border: none;
@@ -35,6 +35,11 @@ button{
         }
       }
 
+}
+h3{
+    color: $blue;
+    text-align: left;
+    margin-bottom: 15px;
 }
 .teams{
     display: flex;
@@ -133,20 +138,55 @@ button{
     }
 }
 .simulation{
-    .simulation-fixture{
-        height: 480px;
+    .teams-table{
+        .table-dark{
+            background-color: $blue;
+            --bs-table-bg:$blue;
+        }
+    }
+    .prediction-table{
+        .table-dark{
+            background-color: $blue;
+            --bs-table-bg:$blue;
+        }
+    }
+    .fixture{
+        height: 440px;
         overflow-y: scroll;
     }
-    .simulation-fixture::-webkit-scrollbar {
+    .fixture::-webkit-scrollbar {
         width: 10px;
         height: 10px;
     }
-    .simulation-fixture::-webkit-scrollbar-track {
+    .fixture::-webkit-scrollbar-track {
         background-color: $blue;
         border-radius: 5px;
     }
-    .simulation-fixture::-webkit-scrollbar-thumb {
+    .fixture::-webkit-scrollbar-thumb {
         background-color: #fff;
         border-radius: 5px;
     }
+    .buttons-container{
+        display: flex;
+        justify-content: space-between;
+        .play-buttons{
+            width: 420px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .reset-button{
+            display: flex;
+            justify-content: end;
+            button{
+                background-color: $white;
+                color: $red;
+                border: 1px solid $red;
+                padding: 4px 10px;
+                width: 130px;
+            }
+        }
+
+    }
+
 }
+

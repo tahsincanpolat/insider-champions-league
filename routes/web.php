@@ -19,6 +19,7 @@ Route::post('/play-next-week', [SimulationController::class, 'playNextWeek']);
 Route::post('/play-all-weeks', [SimulationController::class, 'playAllWeeks']);
 Route::post('/reset-data', [SimulationController::class, 'resetData']);
 Route::get('/get-standings', [SimulationController::class, 'getStandings']);
+Route::get('/get-championleague-predictions', [SimulationController::class, 'getChampionLeaguePredictions']);
 
 Route::get('/{any}', function () {
     return view('welcome');

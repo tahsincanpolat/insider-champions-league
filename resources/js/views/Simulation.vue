@@ -1,29 +1,33 @@
 <template>
-  <div class="simulation">
-    <h1>Simulation</h1>
-    <h2>Standings</h2>
-    <div class="simulation-container">
-      <div class="predictions-table">
-        <table>
-          <thead>
+  <div class="simulation container-fluid">
+    <h1 class="text-center mb-4">Simulation</h1>
+    <div class="simulation-container row">
+      <div class="teams-table col-md-4">
+        <h3>Standings</h3>
+        <table class="table">
+          <thead class="table-dark">
             <tr>
-              <th>Team</th>
-              <th>Point</th>
-              <th>Avarage</th>
+              <th scope="col">Team</th>
+              <th scope="col">P</th>
+              <th scope="col">GS</th>
+              <th scope="col">GC</th>
+              <th scope="col">GD</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="team in standings" :key="team.id">
               <td>{{ team.name }}</td>
               <td>{{ team.points }}</td>
+              <td>{{ team.goals_scored }}</td>
+              <td>{{ team.goals_conceded}}</td>
               <td>{{ team.goal_difference }}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="simulation-fixture">
+      <div class="simulation-fixture col-md-4">
+        <h3>Fixture</h3>
         <div class="fixture">
-            <h1>Fixture</h1>
             <div v-for="week in groupedFixtures" :key="week.week">
                 <div class="fixture-box">
                     <h5 class="week">Week {{ week.week }}</h5>
@@ -48,20 +52,32 @@
             </div>
           </div>
       </div>
-
-      <div class="teams-table">
-        <h2>Champions Prediction</h2>
-        <ul>
-          <li v-for="team in teams" :key="team.id">
-            {{ team.name }}
-          </li>
-        </ul>
+      <div class="prediction-table col-md-4">
+        <h3>Champion League Prediction</h3>
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Team</th>
+              <th scope="col">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="prediction in championsleaguePredictions" :key="prediction.team_id">
+              <td>{{ prediction.team_name }}</td>
+              <td>{{ prediction.percentage }}%</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="buttons-container">
-      <button @click="playNextWeek">Play Next Week</button>
-      <button @click="playAllWeeks">Play All Weeks</button>
-      <button @click="resetData">Reset Data</button>
+        <div class="play-buttons">
+            <button @click="playNextWeek">Play Next Week</button>
+            <button @click="playAllWeeks">Play All Weeks</button>
+        </div>
+        <div class="reset-button text-right">
+            <button @click="resetData">Reset Data</button>
+        </div>
     </div>
   </div>
 </template>
@@ -77,6 +93,7 @@ export default {
       fixtures: [],
       groupedFixtures: [],
       standings: [],
+      championsleaguePredictions: []
     };
   },
   created() {
@@ -112,7 +129,6 @@ export default {
           this.groupedFixtures = Object.values(grouped).sort(
             (a, b) => a.week - b.week
           );
-          console.log(this.groupedFixtures);
           this.updateStandings();
         })
         .catch((error) => {
@@ -123,6 +139,7 @@ export default {
       axios.post("/play-next-week")
         .then((response) => {
           this.fetchFixtures();
+          this.fetchChampionLeaguePredictions();
         })
         .catch((error) => {
           console.error(error);
@@ -132,6 +149,7 @@ export default {
       axios.post("/play-all-weeks")
         .then((response) => {
           this.fetchFixtures();
+          this.fetchChampionLeaguePredictions();
         })
         .catch((error) => {
           console.error(error);
@@ -141,6 +159,7 @@ export default {
       axios.post("/reset-data")
         .then((response) => {
           this.fetchFixtures();
+          this.championsleaguePredictions = [];
         })
         .catch((error) => {
           console.error(error);
@@ -150,6 +169,16 @@ export default {
       axios.get("/get-standings")
         .then((response) => {
           this.standings = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    fetchChampionLeaguePredictions() {
+      axios
+        .get("/get-championleague-predictions")
+        .then((response) => {
+          this.championsleaguePredictions = response.data;
         })
         .catch((error) => {
           console.error(error);

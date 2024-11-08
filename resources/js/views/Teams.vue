@@ -31,7 +31,6 @@ export default {
     fetchTeams() {
       axios.get("/teams")
         .then((response) => {
-          console.log(response);
           this.teams = response.data;
         })
         .catch((error) => {
